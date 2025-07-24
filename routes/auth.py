@@ -1,7 +1,7 @@
 import uuid
 import bcrypt
 from database import get_db
-from fastapi import HTTPException, Depends, Header
+from fastapi import HTTPException, Depends
 from middleware.auth_middleware import auth_middleware 
 from models.user import User
 from pydantic_schemas.user_create import UserCreate

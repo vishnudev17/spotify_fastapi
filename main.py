@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from models.base import Base
 from routes import auth
 from database import engine
