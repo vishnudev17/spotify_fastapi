@@ -3,6 +3,7 @@ uvicorn[standard]
 sqlalchemy
 pydantic
 psycopg2-binary
+PyJWT
 python-multipart  # if you use Form data
 passlib[bcrypt]   # if you hash passwords
 email-validator   # if you validate emails
