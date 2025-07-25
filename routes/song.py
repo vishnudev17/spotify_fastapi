@@ -5,6 +5,7 @@ from database import get_db
 from middleware.auth_middleware import auth_middleware
 import cloudinary
 import cloudinary.uploader
+from models.song import Song
 
 router = APIRouter()
 
@@ -16,7 +17,7 @@ cloudinary.config(
 )
 
 
-@router.post("/upload")
+@router.post("/upload", status_code=201)
 def upload_song(
     song: UploadFile = File(...),
     thumbnail: UploadFile = File(...),
@@ -36,4 +37,16 @@ def upload_song(
     )
     print(thumbnail_res)
 
-    return "ok"
+    new_song = Song(
+        id=song_id,
+        song_name=song_name,
+        artist=artist,
+        hex_code=hex_code,
+        song_url=song_res["url"],
+        thumbnail_url=thumbnail_res["url"],
+    )
+
+    db.add(new_song)
+    db.commit()
+    db.refresh(new_song)
+    return new_song
